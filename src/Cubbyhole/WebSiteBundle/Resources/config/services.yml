@@ -1,0 +1,3 @@
+services:
+    api.plan:
+        class: Cubbyhole\WebApiBundle\Service\PlanService
