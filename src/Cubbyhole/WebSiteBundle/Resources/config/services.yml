@@ -1,3 +1,8 @@
 services:
+    browser:
+        class: Buzz\Browser
     api.plan:
         class: Cubbyhole\WebApiBundle\Service\PlanService
+        arguments: ["%api_username%", "%api_password%"]
+        calls: 
+            - [ setBrowser, [ @browser ] ] 
