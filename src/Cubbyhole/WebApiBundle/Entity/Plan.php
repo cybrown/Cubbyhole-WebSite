@@ -2,15 +2,53 @@
 
 namespace Cubbyhole\WebApiBundle\Entity;
 
+use JMS\Serializer\Annotation\Type;
+
 class Plan
 {
+    /**
+     * @Type("integer")
+     */
+    protected $id;
+    
+    /**
+     * @Type("string")
+     */
     protected $name;
+    
+    /**
+     * @Type("integer")
+     */
     protected $price;
+    
+    /**
+     * @Type("integer")
+     */
     protected $bandwidthDownload;
+    
+    /**
+     * @Type("integer")
+     */
     protected $bandwidthUpload;
+    
+    /**
+     * @Type("integer")
+     */
     protected $space;
+    
+    /**
+     * @Type("integer")
+     */
     protected $shareQuota;
     
+    public function getId() {
+        return $this->id;
+    }
+
+    public function setId($id) {
+        $this->id = $id;
+    }
+
     public function getName() {
         return $this->name;
     }

@@ -3,6 +3,6 @@ services:
         class: Buzz\Browser
     api.plan:
         class: Cubbyhole\WebApiBundle\Service\PlanService
-        arguments: ["%api_username%", "%api_password%"]
+        arguments: [%api_username%, %api_password%, @jms_serializer]
         calls: 
             - [ setBrowser, [ @browser ] ] 

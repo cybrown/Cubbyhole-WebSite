@@ -8,11 +8,13 @@ class PlanService
     private $browser;
     private $username;
     private $password;
+    private $serializer;
 
-    function __construct($username, $password)
+    function __construct($username, $password, $serializer)
     {
         $this->username = $username;
         $this->password = $password;
+        $this->serializer = $serializer;
     }
     
     public function setBrowser($browser)
@@ -22,12 +24,12 @@ class PlanService
 
     public function findAll() 
     {
-        return $response = $this->get();
+        return $this->serializer->deserialize($this->get("/"), "ArrayCollection<Cubbyhole\WebApiBundle\Entity\Plan>", 'json');
     }
     
     public function findOne($id)
     {
-        return $response = $this->get("/".$id);
+        return $this->serializer->deserialize($this->get("/".$id), "Cubbyhole\WebApiBundle\Entity\Plan", 'json');
     }
     
     private function get($path = '/')
@@ -35,6 +37,6 @@ class PlanService
         $response = $this->browser->get($this->baseUrl.$path, [
             "Authorization" => "Basic ".base64_encode($this->username.":".$this->password)
         ]);
-        return json_decode($response->getContent());
+        return $response->getContent();
     }
 }
