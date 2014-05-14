@@ -27,4 +27,13 @@ class DefaultController extends Controller
        return ['plans' => $this->get("api.plan")->findAll()];
     }
 
-}
+    /**
+     *  @Route ("/plans/{id}", name="planupdt")
+     * @Template()
+     */
+    public function planUpdtAction($id)
+    {
+          return ['plan' => $this->get("api.plan")->findOne($id)];
+    }
+    
+    }
