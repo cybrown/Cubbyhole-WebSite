@@ -24,7 +24,7 @@ class PlanService
 
     public function findAll() 
     {
-        return $this->serializer->deserialize($this->get("/"), "ArrayCollection<Cubbyhole\WebApiBundle\Entity\Plan>", 'json');
+        return $this->serializer->deserialize($this->get("/"), "array<Cubbyhole\WebApiBundle\Entity\Plan>", 'json');
     }
     
     public function findOne($id)
