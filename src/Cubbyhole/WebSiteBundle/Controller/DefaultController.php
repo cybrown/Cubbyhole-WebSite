@@ -2,10 +2,10 @@
 
 namespace Cubbyhole\WebSiteBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Cubbyhole\WebApiBundle\Entity\Plan;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class DefaultController extends Controller
 {
@@ -36,4 +36,23 @@ class DefaultController extends Controller
           return ['plan' => $this->get("api.plan")->findOne($id)];
     }
     
-    }
+    /**
+     * @Route("/form")
+     * @Template()
+     */
+    public function formAction()
+    {
+        $plan = new Plan();
+        $plan->setName("the plan");
+        $form = $this->createFormBuilder($plan)
+            ->add('name', 'text')
+            ->add('price', 'date')
+            ->add('bandwidthDownload', 'text')
+            ->add('bandwidthUpload', 'text')
+            ->add('space', 'text')
+            ->add('shareQuota', 'text')
+            ->add('Envoyer', 'submit')
+            ->getForm();
+        return ["form" => $form->createView()];
+    }   
+}
