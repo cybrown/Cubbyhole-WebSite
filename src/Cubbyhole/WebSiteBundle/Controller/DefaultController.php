@@ -32,19 +32,10 @@ class DefaultController extends Controller
      *  @Route ("/plans/{id}", name="planupdt")
      * @Template()
      */
-    public function planUpdtAction($id)
+    public function planUpdtAction(Request $request, $id)
     {
-          return ['plan' => $this->get("api.plan")->findOne($id)];
-    }
-    
-    /**
-     * @Route("/form")
-     * @Template()
-     */
-    public function formAction(Request $request)
-    {
-        $plan = new Plan();
-        $plan->setName("the plan");
+        $plan = $this->get("api.plan")->findOne($id);
+        //$plan->setName("the plan");
         $form = $this->createFormBuilder($plan)
             ->add('name', 'text')
             ->add('price', 'number')
@@ -56,6 +47,7 @@ class DefaultController extends Controller
             ->getForm();
         $form->handleRequest($request);
         if ($form->isValid()) {
+             $this->get("api.plan")->update($form->getData());
             return [
                 "message" => "L'objet a bien été reçu",
                 "objectJson" => var_export($form->getData(), true),
@@ -68,5 +60,74 @@ class DefaultController extends Controller
                 "form" => $form->createView()
             ];
         }
-    }   
+    }
+
+    /**
+     * @Route("/addPlan")
+     * @Template()
+     */
+    public function addPlanAction(Request $request) {
+        $plan = new Plan();
+        $form = $this->createFormBuilder($plan)
+                ->add('Name', 'text')
+                ->add('Price', 'number')
+                ->add('BandwidthDownload', 'number')
+                ->add('BandwidthUpload', 'number')
+                ->add('Space', 'number')
+                ->add('ShareQuota', 'number')
+                ->add('Envoyer', 'submit')
+                ->getForm();
+        $form->handleRequest($request);
+        if ($form->isValid()) {
+           $this->get("api.plan")->create($form->getData());
+            return [
+                "message" => "L'objet a bien été reçu",
+                "objectJson" => var_export($form->getData(), true),
+                "form" => false
+              
+            ];
+        } else {
+            return [
+                "message" => "Veuillez entrer un objet",
+                "objectJson" => "",
+                "form" => $form->createView()
+            ];
+        }
+        $url = $this->generateUrl('/','');
+        $this->redirect($url);
+    }
+    
+     /**
+     *  @Route ("/plans/delete/{id}", name="plandelete")
+     * @Template()
+     */
+    public function planDeleteAction(Request $request, $id)
+    {
+        $plan = $this->get("api.plan")->findOne($id);
+        $form = $this->createFormBuilder($plan)
+            ->add('name', 'text')
+            ->add('price', 'number')
+            ->add('bandwidthDownload', 'number')
+            ->add('bandwidthUpload', 'number')
+            ->add('space', 'number')
+            ->add('shareQuota', 'number')
+            ->add('Envoyer', 'submit')
+            ->getForm();
+        $form->handleRequest($request);
+        //if ($form->isValid()) {
+             $this->get("api.plan")->delete($form->getData());
+      return [
+                "message" => "L'objet a bien été supprimer",
+                //"objectJson" => var_export($form->getData(), true),
+//                "form" => false
+           ];
+//        } else {
+//            return [
+//                "message" => "Erreur suppression du plan",
+//                "objectJson" => "",
+//                "form" => $form->createView()
+//            ];
+//        }
+    }
+
 }

@@ -8,6 +8,7 @@
             {{plan.space}}
             {{plan.shareQuota}}
             <a href="{{ path('planupdt', {"id": plan.id}) }}">Modifier</a>
+            <a href="{{ path('plandelete', {"id": plan.id}) }}">Supprimer</a>
         </li>     
     {% endfor %}
 </ul>

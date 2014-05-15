@@ -39,4 +39,54 @@ class PlanService
         ]);
         return $response->getContent();
     }
+    
+    public function create($data){
+        $browser = new \Buzz\Browser();
+        $browser->put("http://localhost:3000/plans/", [
+            "Authorization" => "Basic dXNlcjpwYXNz",
+            "Content-Type" => "application/json"
+        ], json_encode([
+            "name" => $data->getName(),
+            "price" => $data->getPrice(),
+            "bandwidthDownload"=>$data->getBandwidthDownload(),
+            "bandwidthUpload"=>$data->getBandwidthUpload(),
+            "space"=>$data->getSpace(),
+            "shareQuota"=>$data->getShareQuota()
+                
+        ]));
+     
+    }
+        public function update($data){
+        $browser = new \Buzz\Browser();
+        $browser->post("http://localhost:3000/plans/".$data->getId(), [
+            "Authorization" => "Basic dXNlcjpwYXNz",
+            "Content-Type" => "application/json"
+        ], json_encode([
+            "name" => $data->getName(),
+            "price" => $data->getPrice(),
+            "bandwidthDownload"=>$data->getBandwidthDownload(),
+            "bandwidthUpload"=>$data->getBandwidthUpload(),
+            "space"=>$data->getSpace(),
+            "shareQuota"=>$data->getShareQuota()
+                
+        ]));
+     
+    }
+    
+      public function delete($data){
+        $browser = new \Buzz\Browser();
+        $browser->delete("http://localhost:3000/plans/".$data->getId(), [
+            "Authorization" => "Basic dXNlcjpwYXNz",
+            "Content-Type" => "application/json"
+        ], json_encode([
+            "name" => $data->getName(),
+            "price" => $data->getPrice(),
+            "bandwidthDownload"=>$data->getBandwidthDownload(),
+            "bandwidthUpload"=>$data->getBandwidthUpload(),
+            "space"=>$data->getSpace(),
+            "shareQuota"=>$data->getShareQuota()
+                
+        ]));
+     
+    }
 }
