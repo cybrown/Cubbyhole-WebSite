@@ -1,14 +1,6 @@
 <ul>
-    <ul>Name:</ul>
-    <ul> Price:</ul>
-    <ul>Bandwidth Download:</ul>
-    <ul> Bandwidth Upload: </ul>
-    <ul> Space: </ul>
-    <ul> Share Quota: </ul>
-<br/>
-   {% for plan in plans %}
-    
-        <ul>
+    {% for plan in plans %}
+        <li>
             {{plan.name}} 
             {{plan.price}}  
             {{plan.bandwidthDownload}} 
@@ -16,8 +8,6 @@
             {{plan.space}}
             {{plan.shareQuota}}
             <a href="{{ path('planupdt', {"id": plan.id}) }}">Modifier</a>
-        </ul>         
- 
+        </li>     
     {% endfor %}
-  
 </ul>
