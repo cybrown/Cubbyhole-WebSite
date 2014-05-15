@@ -3,6 +3,7 @@
 namespace Cubbyhole\WebApiBundle\Entity;
 
 use JMS\Serializer\Annotation\Type;
+use JMS\Serializer\Annotation\SerializedName;
 
 class Plan
 {
@@ -23,11 +24,13 @@ class Plan
     
     /**
      * @Type("integer")
+     * @SerializedName("bandwidthDownload")
      */
     protected $bandwidthDownload;
     
     /**
      * @Type("integer")
+     * @SerializedName("bandwidthUpload")
      */
     protected $bandwidthUpload;
     
@@ -38,6 +41,7 @@ class Plan
     
     /**
      * @Type("integer")
+     * @SerializedName("shareQuota")
      */
     protected $shareQuota;
     
