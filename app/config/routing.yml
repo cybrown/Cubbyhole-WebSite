@@ -7,7 +7,3 @@ cubbyhole_web_site:
     resource: "@CubbyholeWebSiteBundle/Controller/"
     type:     annotation
     prefix:   /
-
-login: 
-    pattern: /login
-    default: {_cubbyhole_user: Security/login }

@@ -2,9 +2,9 @@
 
 namespace Cubbyhole\WebApiBundle\Service;
 
-class UserService
+class AccountService
 {
-    private $baseUrl = 'http://localhost:3000/user';
+    private $baseUrl = 'http://localhost:3000/accounts';
     private $browser;
     private $username;
     private $password;
@@ -21,12 +21,22 @@ class UserService
     {
         $this->browser = $browser;
     }
-
-    public function findUser($username,$password)
-    {   
-        return $this->serializer->deserialize($this->get("/".$username), "Cubbyhole\WebApiBundle\Entity\User", 'json');
+    
+    public function isValid($username, $password)
+    {
+        $response = $this->browser->get($this->baseUrl . "/", [
+            "Authorization" => "Basic ".base64_encode($username . ":" . $password)
+        ]);
+        $statusCode = $response->getStatusCode();
+        return (($statusCode >= 200) && ($statusCode < 300)) || ($statusCode == 403);
     }
-       private function get($path = '/')
+
+    public function findOne($id)
+    {   
+        return $this->serializer->deserialize($this->get("/".$id), "Cubbyhole\WebApiBundle\Entity\Acount", 'json');
+    }
+    
+    private function get($path = '/')
     {
         $response = $this->browser->get($this->baseUrl.$path, [
             "Authorization" => "Basic ".base64_encode($this->username.":".$this->password)
@@ -34,7 +44,4 @@ class UserService
         return $response->getContent();
     }
     
-
 }
-
-
