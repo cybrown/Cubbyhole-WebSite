@@ -42,8 +42,8 @@ class PlanService
     
     public function create($data){
         $browser = new \Buzz\Browser();
-        $browser->put("http://localhost:3000/plans/", [
-            "Authorization" => "Basic dXNlcjpwYXNz",
+        $browser->put($this->baseUrl."/", [
+            "Authorization" => "Basic ".base64_encode($this->username.":".$this->password),
             "Content-Type" => "application/json"
         ], json_encode([
             "name" => $data->getName(),
@@ -58,8 +58,8 @@ class PlanService
     }
         public function update($data){
         $browser = new \Buzz\Browser();
-        $browser->post("http://localhost:3000/plans/".$data->getId(), [
-            "Authorization" => "Basic dXNlcjpwYXNz",
+        $browser->post($this->baseUrl."/".$data->getId(), [
+            "Authorization" => "Basic ".base64_encode($this->username.":".$this->password),
             "Content-Type" => "application/json"
         ], json_encode([
             "name" => $data->getName(),
@@ -75,8 +75,8 @@ class PlanService
     
       public function delete($data){
         $browser = new \Buzz\Browser();
-        $browser->delete("http://localhost:3000/plans/".$data->getId(), [
-            "Authorization" => "Basic dXNlcjpwYXNz",
+        $browser->delete($this->baseUrl."/".$data->getId(), [
+            "Authorization" => "Basic ".base64_encode($this->username.":".$this->password),
             "Content-Type" => "application/json"
         ], json_encode([
             "name" => $data->getName(),
