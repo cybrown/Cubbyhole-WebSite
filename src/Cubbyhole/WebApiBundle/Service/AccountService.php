@@ -33,7 +33,7 @@ class AccountService
 
     public function findOne($id)
     {   
-        return $this->serializer->deserialize($this->get("/".$id), "Cubbyhole\WebApiBundle\Entity\Acount", 'json');
+        return $this->serializer->deserialize($this->get("/".$id), "Cubbyhole\WebApiBundle\Entity\Account", 'json');
     }
     
     private function get($path = '/')
