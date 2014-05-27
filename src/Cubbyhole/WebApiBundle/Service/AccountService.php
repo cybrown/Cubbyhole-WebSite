@@ -22,13 +22,16 @@ class AccountService
         $this->browser = $browser;
     }
     
-    public function isValid($username, $password)
+    public function whoami($username, $password)
     {
-        $response = $this->browser->get($this->baseUrl . "/", [
+        $response = $this->browser->get($this->baseUrl . "/whoami", [
             "Authorization" => "Basic ".base64_encode($username . ":" . $password)
         ]);
-        $statusCode = $response->getStatusCode();
-        return (($statusCode >= 200) && ($statusCode < 300)) || ($statusCode == 403);
+        try {
+            return $this->serializer->deserialize($response->getContent(), "Cubbyhole\WebApiBundle\Entity\Account", 'json');
+        } catch (\Exception $ex) {
+            return null;
+        }
     }
 
     public function findOne($id)

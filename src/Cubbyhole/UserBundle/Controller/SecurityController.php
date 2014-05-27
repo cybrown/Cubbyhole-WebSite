@@ -40,10 +40,10 @@ class SecurityController extends Controller {
      * @Route("/login_check", name="login_check")
      */
     public function loginCheckAction(Request $request) {
-        $valid = $this->get('api.account')->isValid(
+        $account = $this->get('api.account')->whoami(
                 $request->request->get('username'),
                 $request->request->get('password'));
-        return new Response($valid ? "ok" : "not ok");
+        return new Response($account != null ? "ok" : "not ok");
     }
 
 }
