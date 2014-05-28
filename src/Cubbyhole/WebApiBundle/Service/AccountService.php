@@ -2,6 +2,10 @@
 
 namespace Cubbyhole\WebApiBundle\Service;
 
+use Buzz\Browser;
+use Cubbyhole\WebApiBundle\Entity\Account;
+use Exception;
+
 class AccountService
 {
     private $baseUrl = 'http://localhost:3000/accounts';
@@ -29,7 +33,7 @@ class AccountService
         ]);
         try {
             return $this->serializer->deserialize($response->getContent(), "Cubbyhole\WebApiBundle\Entity\Account", 'json');
-        } catch (\Exception $ex) {
+        } catch (Exception $ex) {
             return null;
         }
     }
@@ -45,6 +49,14 @@ class AccountService
             "Authorization" => "Basic ".base64_encode($this->username.":".$this->password)
         ]);
         return $response->getContent();
+    }
+    
+     public function create(Account $account){
+        $browser = new Browser();
+        $browser->put($this->baseUrl."/", [
+            "Authorization" => "Basic ".base64_encode($this->username.":".$this->password),
+            "Content-Type" => "application/json"
+        ], $this->serializer->serialize($account, "json"));
     }
     
 }

@@ -2,7 +2,6 @@
 namespace Cubbyhole\WebApiBundle\Entity;
 
 use JMS\Serializer\Annotation\Type;
-use JMS\Serializer\Annotation\SerializedName;
 
 class Account
 {
@@ -17,15 +16,14 @@ class Account
     protected $username;
 
     /**
-    * @Type("integer")
+    * @Type("string")
     */
     protected $password;
 
     /**
     * @Type("integer")
-    * @SerializedName("planId")
     */
-    protected $plan_id;
+    protected $plan;
 
     /**
     * @Type("integer")
@@ -48,8 +46,8 @@ class Account
         return $this->password;
     }
 
-    public function getPlanId() {
-        return $this->planId;
+    public function getPlan() {
+        return $this->plan;
     }
 
     public function getLevel() {
@@ -64,8 +62,8 @@ class Account
         $this->password = $password;
     }
 
-    public function setPlanId($planId) {
-        $this->planId = $planId;
+    public function setPlan($plan) {
+        $this->plan = $plan;
     }
 
     public function setLevel($level) {

@@ -8,19 +8,24 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\SecurityContext;
+use Cubbyhole\WebApiBundle\Entity\Account;
 
 class SecurityController extends Controller {
 
     /**
-     * @Route("/login")
+     * @Route("/secured/login", name="login")
      * @Template()
      */
     public function loginAction(Request $request) {
         // Si le visiteur est déjà identifié, on le redirige vers l'accueil
-        if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-            return $this->redirect($this->generateUrl('/'));
+        try {
+            if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+                return $this->redirect($this->generateUrl('/'));
+            }
+        } catch (\Exception $ex) {
+            
         }
-
+        
         // On vérifie s'il y a des erreurs d'une précédente soumission du formulaire
         if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
             $error = $request->attributes->get(SecurityContext::AUTHENTICATION_ERROR);
@@ -46,4 +51,45 @@ class SecurityController extends Controller {
         return new Response($account != null ? "ok" : "not ok");
     }
 
+     /**
+     * @Route("/register")
+     * @Template() 
+     */
+    public function registerAction(Request $request) {
+        $account = new Account();
+        $form = $this->createFormBuilder($account)
+                ->add('username', 'text')
+                ->add('password', 'password')
+                ->add('Envoyer', 'submit')
+                ->getForm();
+        $form->handleRequest($request);
+        if ($form->isValid()) {
+            $account = $form->getData();
+            $account->setLevel(10);
+            $account->setPlan(4); //TODO Changer l'id du plan
+            $this->get("api.account")->create($account);
+            return [
+                "message" => "L'objet a bien été reçu",
+                "objectJson" => var_export($form->getData(), true),
+                "form" => false
+              
+            ];
+        } else {
+            return [
+                "message" => "Veuillez remplir les informations demandées:",
+                "objectJson" => "",
+                "form" => $form->createView()
+            ];
+        }
+        $url = $this->generateUrl('/','');
+        $this->redirect($url);
+    }
+    
+     /**
+     * @Route("/secured")
+     * @Template() 
+     */
+     function securedAction(){
+         return  ['name'=>'ok'];
+     }
 }
