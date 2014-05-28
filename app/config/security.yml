@@ -23,12 +23,12 @@ security:
             security: false
 
         secured_area:
-            pattern:    ^/secured/
+            pattern:    ^/secured
             form_login:
-                check_path: _security_check
+                check_path: login_check
                 login_path: login
             logout:
-                path:   /logout
+                path:   /secured/logout
                 target: /
             #anonymous: ~
             #http_basic:

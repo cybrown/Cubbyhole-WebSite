@@ -9,4 +9,4 @@ cubbyhole_web_site:
     prefix:   /
 
 logout:
-    pattern: logout
+    pattern: /secured/logout
