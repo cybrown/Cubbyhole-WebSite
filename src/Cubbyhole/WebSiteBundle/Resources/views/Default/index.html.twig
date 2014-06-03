@@ -1,1 +1,16 @@
-Hello {{ name }}!
+{% block head %}
+    <link rel="icon" sizes="16x16" href="{{ asset('favicon.ico') }}" />
+    <link rel="stylesheet" href="{{ asset('/WebSiteBundle/css/style.css') }}" />
+{% endblock %}
+    
+{% block body %}
+  
+        <h1> Bienvenue sur le Site de Cubbyhole! </h1>
+        Pour commencer l'aventure veuillez vous
+        <a href="/secured/login"> authentifier </a> ou <a href="/register"> procéder a l'inscription </a>
+                 
+
+{% endblock %}
+
+
+

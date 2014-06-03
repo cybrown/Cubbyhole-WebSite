@@ -31,11 +31,12 @@ class AccountService
         $response = $this->browser->get($this->baseUrl . "/whoami", [
             "Authorization" => "Basic ".base64_encode($username . ":" . $password)
         ]);
-        try {
-            return $this->serializer->deserialize($response->getContent(), "Cubbyhole\WebApiBundle\Entity\Account", 'json');
-        } catch (Exception $ex) {
-            return null;
-        }
+        //try {
+           
+        return $this->serializer->deserialize($response->getContent(), "Cubbyhole\WebApiBundle\Entity\Account", 'json');
+        //} catch (Exception $ex) {
+          //  return null;
+        //}
     }
 
     public function findOne($id)
