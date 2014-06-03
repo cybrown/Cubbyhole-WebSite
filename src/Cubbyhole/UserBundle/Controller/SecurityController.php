@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\SecurityContext;
 use Cubbyhole\WebApiBundle\Entity\Account;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class SecurityController extends Controller {
 
@@ -22,10 +23,8 @@ class SecurityController extends Controller {
             if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
                 return $this->redirect($this->generateUrl('/'));
             }
-        } catch (\Exception $ex) {
-            
-        }
-        
+        } catch (\Exception $ex) {   
+        } 
         // On vérifie s'il y a des erreurs d'une précédente soumission du formulaire
         if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
             $error = $request->attributes->get(SecurityContext::AUTHENTICATION_ERROR);
@@ -33,7 +32,6 @@ class SecurityController extends Controller {
             $error = $request->getSession()->get(SecurityContext::AUTHENTICATION_ERROR);
             $request->getSession()->remove(SecurityContext::AUTHENTICATION_ERROR);
         }
-
         return array(
             // Valeur du précédent nom d'utilisateur entré par l'internaute
             'last_username' => $request->getSession()->get(SecurityContext::LAST_USERNAME),
@@ -45,10 +43,21 @@ class SecurityController extends Controller {
      * @Route("/login_check", name="login_check")
      */
     public function loginCheckAction(Request $request) {
+        $session = new Session();
+        $session->start();
         $account = $this->get('api.account')->whoami(
                 $request->request->get('username'),
-                $request->request->get('password'));
-        return new Response($account != null ? "ok" : "not ok");
+                $request->request->get('password'));   
+        $id= $account->getId();
+        $username=$account->getUsername();
+      //return new Response($id != "null" ? "ok" : "not ok");
+    if ($id!=null){
+        $session->set('username',$username);
+        $session->get('username');
+        return $this->redirect("/plans");
+    }else{
+        return new Response("pas ok");
+    }
     }
 
      /**
