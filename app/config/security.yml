@@ -1,6 +1,10 @@
 security:
     encoders:
-        Cubbyhole\WebApiBundle\Entity\Account: plaintext
+        Cubbyhole\WebApiBundle\Entity\Account:
+            algorithm:   sha1
+            iterations: 1
+            encode_as_base64: true
+
             
     role_hierarchy:
         ROLE_ADMIN:       ROLE_USER
@@ -28,7 +32,7 @@ security:
             form_login:
                 check_path: login_check
                 login_path: login
-                default_target_path: /plans
+
             logout:
                 path:   /secured/logout
                 target: /

@@ -49,12 +49,12 @@ class SecurityController extends Controller {
                 $request->request->get('username'),
                 $request->request->get('password'));   
         $id= $account->getId();
-        $username=$account->getUsername();
+       # $username=$account->getUsername();
       //return new Response($id != "null" ? "ok" : "not ok");
     if ($id!=null){
-        $session->set('username',$username);
-        $session->get('username');
-        return $this->redirect("/plans");
+       # $session->set('username',$username);
+        #$session->get('username');
+        return $this->redirect("/secured/plans");
     }else{
         return new Response("pas ok");
     }

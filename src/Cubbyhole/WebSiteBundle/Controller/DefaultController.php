@@ -20,14 +20,14 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/plans")
+     * @Route("/plans", name="plans")
      * @Template()
      */
     public function planAction()
     {
        return ['plans' => $this->get("api.plan")->findAll()];
     }
-
+    
     /**
      *  @Route ("/plans/{id}", name="planupdt")
      * @Template()
