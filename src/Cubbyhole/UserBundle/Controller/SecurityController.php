@@ -54,7 +54,7 @@ class SecurityController extends Controller {
     if ($id!=null){
        # $session->set('username',$username);
         #$session->get('username');
-        return $this->redirect("/secured/plans");
+        return $this->redirect("/accueil");
     }else{
         return new Response("pas ok");
     }
@@ -101,4 +101,5 @@ class SecurityController extends Controller {
      function securedAction(){
          return  ['name'=>'ok'];
      }
+    
 }
