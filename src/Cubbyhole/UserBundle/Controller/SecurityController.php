@@ -2,6 +2,9 @@
 
 namespace Cubbyhole\UserBundle\Controller;
 
+use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage;
+use Symfony\Component\HttpFoundation\Session\Storage\Handler\NativeFileSessionHandler;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -9,12 +12,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\SecurityContext;
 use Cubbyhole\WebApiBundle\Entity\Account;
-use Symfony\Component\HttpFoundation\Session\Session;
+
 
 class SecurityController extends Controller {
 
     /**
-     * @Route("/secured/login", name="login")
+     * @Route("/login", name="login")
      * @Template()
      */
     public function loginAction(Request $request) {
@@ -49,11 +52,13 @@ class SecurityController extends Controller {
                 $request->request->get('username'),
                 $request->request->get('password'));   
         $id= $account->getId();
-       # $username=$account->getUsername();
+       $username=$account->getUsername();
       //return new Response($id != "null" ? "ok" : "not ok");
     if ($id!=null){
-       # $session->set('username',$username);
-        #$session->get('username');
+        $session->set('id',$id);
+        $session->get('id');
+        $session->set('username',$username);
+        $session->get('username');
         return $this->redirect("/accueil");
     }else{
         return new Response("pas ok");
@@ -102,4 +107,33 @@ class SecurityController extends Controller {
          return  ['name'=>'ok'];
      }
     
+      /**
+     *  @Route ("/accountupdt/{id}", name="accountUpdt")
+     * @Template()
+     */
+    public function accountUpdtAction(Request $request, $id)
+    {
+        $account = $this->get("api.account")->findOne($id);
+ 
+        $form = $this->createFormBuilder($account)
+            ->add('username', 'text')
+            ->add('password', 'password')
+            ->add('Envoyer', 'submit')
+            ->getForm();
+        $form->handleRequest($request);
+        if ($form->isValid()) {
+             $this->get("api.account")->update($form->getData());
+            return [
+                "message" => "L'objet a bien été reçu",
+                "objectJson" => var_export($form->getData(), true),
+                "form" => false
+            ];
+        } else {
+            return [
+                "message" => "Modification de vos données personnelles:",
+                "objectJson" => "",
+                "form" => $form->createView()
+            ];
+        }
+    }
 }

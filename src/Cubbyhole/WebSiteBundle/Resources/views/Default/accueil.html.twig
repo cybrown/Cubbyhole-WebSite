@@ -1,9 +1,12 @@
-<h1>Bienvenue sur le site de Cubbyhole </h1>
+<h1>Cubbyhole </h1>
 <br/>
 <br/>
+{% set username = app.session.get('username') %}
+{% set id = app.session.get('id') %}
+Bonjour {{username}}! 
+<br/>
 
-
-<a href=""> Gestion de votre compte </a>
+<a href="/accountupdt/{{id}}"> Gestion de votre compte </a>
 <br/>
 <a href="/plans">Modifier votre offre </a>
 
