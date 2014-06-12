@@ -59,6 +59,8 @@ class SecurityController extends Controller {
         $session->get('id');
         $session->set('username',$username);
         $session->get('username');
+        $session->set('level',$account->getLevel());
+        $session->get('level');
         return $this->redirect("/accueil");
     }else{
         return new Response("pas ok");
@@ -136,4 +138,19 @@ class SecurityController extends Controller {
             ];
         }
     }
-}
+    
+    /**
+     * @Route("/logout"), name="logout"
+     * @Template()
+     */
+    public function logoutAction()
+    {
+        $session = $this->get('session');
+        $session->remove('username');
+        $session->remove('id');
+        $session->remove('level');
+      
+
+        return array('name'=>"ok");
+    }
+ }

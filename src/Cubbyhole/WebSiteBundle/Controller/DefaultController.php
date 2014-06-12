@@ -20,13 +20,14 @@ class DefaultController extends Controller
     }
     
      /**
-     * @Route("/accueil"), name="accueil
+     * @Route("/accueil"), name="accueil"
      * @Template()
      */
     public function accueilAction()
     {
         return array('name' => "ok");
     }
+   
 
     /**
      * @Route("/plans", name="plans")

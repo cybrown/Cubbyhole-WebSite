@@ -1,8 +1,11 @@
 <html>
+    {% set level = app.session.get('level') %}
     <h1>Liste des formules disponibles:</h1>
     <a href="/accueil"> retour </a>
+    
     <ul>
     {% for plan in plans %}
+       
         <li>
            {% set id =plan.id %} {{plan.id}}
             {{plan.name}} 
@@ -36,11 +39,12 @@
 <img alt="" border="0" src="https://www.paypalobjects.com/fr_FR/i/scr/pixel.gif" width="1" height="1">
 </form>
           {% endif %}
-         
-            <!-- Condition affichage si admin 
+         {% if level==100 %}
+            <!-- Condition affichage si admin -->
             <a href="{{ path('planupdt', {"id": plan.id}) }}">Modifier</a>
             <a href="{{ path('plandelete', {"id": plan.id}) }}">Supprimer</a>
-            -->
+            
+            {% endif %}
         </li>     
     {% endfor %}
     </ul>

@@ -3,10 +3,25 @@
 <br/>
 {% set username = app.session.get('username') %}
 {% set id = app.session.get('id') %}
-Bonjour {{username}}! 
+{% set level = app.session.get('level') %}
+{% if username=="" %}
+<a href="/"> Merci de bien vouloir vous connecter </a>
+{% else %}
+Bonjour {{username}}!
+{% if level==100 %}
+(Admin Session)
 <br/>
-
+<br/>
+<a href="/plans"> Gestion des offres Cubbyhole </a>
+<br/>
+<a href="/addPlan"> Ajouter une offre </a>
+{% else %}
+<br/>
 <a href="/accountupdt/{{id}}"> Gestion de votre compte </a>
 <br/>
 <a href="/plans">Modifier votre offre </a>
-
+{% endif %}
+<br/>
+<br/>
+<a href="/logout"> Deconnexion </a>
+{% endif %}
