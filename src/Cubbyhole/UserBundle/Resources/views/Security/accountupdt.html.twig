@@ -1,3 +1,4 @@
+{% set id = app.session.get('id') %}
 <div>
     {{ message }}
 </div>
@@ -5,3 +6,5 @@
     {{ form(form) }}
 {% endif %}
 {{ objectJson }}
+
+<a href="/delete/{{id}}" > Suppression du compte </a>

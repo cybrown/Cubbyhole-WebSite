@@ -153,4 +153,24 @@ class SecurityController extends Controller {
 
         return array('name'=>"ok");
     }
+    
+    /**
+     * @Route("/delete/{id}"), name="delete"
+     * @Template()
+     */
+    public function deleteAction(Request $request, $id)
+    {
+        $plan = $this->get("api.account")->findOne($id);
+        $form = $this->createFormBuilder($plan)
+            ->add('username', 'text')
+            ->add('password', 'password')
+            ->add('Envoyer', 'submit')
+            ->getForm();
+        $form->handleRequest($request);
+        //if ($form->isValid()) {
+             $this->get("api.account")->delete($form->getData());
+      return [
+                "message" => "L'objet a bien été supprimer"
+           ];
+    }
  }

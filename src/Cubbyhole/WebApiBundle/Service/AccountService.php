@@ -60,4 +60,11 @@ class AccountService
         ], $this->serializer->serialize($account, "json"));
     }
     
+    public function delete(Account $account){
+         $browser = new Browser();
+        $browser->delete($this->baseUrl."/".$account->getId(), [
+            "Authorization" => "Basic ".base64_encode($this->username.":".$this->password),
+            "Content-Type" => "application/json"
+        ], $this->serializer->serialize($account, "json"));
+    }
 }
