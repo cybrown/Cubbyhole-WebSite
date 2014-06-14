@@ -52,7 +52,8 @@ class PlanService
             "bandwidthDownload"=>$data->getBandwidthDownload(),
             "bandwidthUpload"=>$data->getBandwidthUpload(),
             "space"=>$data->getSpace(),
-            "shareQuota"=>$data->getShareQuota()
+            "shareQuota"=>$data->getShareQuota(),
+            "idpaypal"=>$data->getIdPaypal()
                 
         ]));
      
@@ -68,7 +69,8 @@ class PlanService
             "bandwidthDownload"=>$data->getBandwidthDownload(),
             "bandwidthUpload"=>$data->getBandwidthUpload(),
             "space"=>$data->getSpace(),
-            "shareQuota"=>$data->getShareQuota()
+            "shareQuota"=>$data->getShareQuota(),
+            "idpaypal"=>$data->getIdPaypal()
                 
         ]));
      
@@ -85,8 +87,27 @@ class PlanService
             "bandwidthDownload"=>$data->getBandwidthDownload(),
             "bandwidthUpload"=>$data->getBandwidthUpload(),
             "space"=>$data->getSpace(),
-            "shareQuota"=>$data->getShareQuota()
+            "shareQuota"=>$data->getShareQuota(),
+            "idpaypal"=>$data->getIdPaypal()
                 
         ]));
       }
+        public function updatePlanAccont($id,$plan){
+                    $browser = new \Buzz\Browser();
+        $browser->post($this->baseUrl."/".$data->getId(), [
+            "Authorization" => "Basic ".base64_encode($this->username.":".$this->password),
+            "Content-Type" => "application/json"
+        ], json_encode([
+            "name" => $data->getName(),
+            "price" => $data->getPrice(),
+            "bandwidthDownload"=>$data->getBandwidthDownload(),
+            "bandwidthUpload"=>$data->getBandwidthUpload(),
+            "space"=>$data->getSpace(),
+            "shareQuota"=>$data->getShareQuota()
+                
+        ]));
+     
+    }
+     
+   
 }

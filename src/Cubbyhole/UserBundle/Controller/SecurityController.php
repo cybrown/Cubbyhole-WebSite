@@ -61,7 +61,7 @@ class SecurityController extends Controller {
         $session->get('level');
         return $this->redirect("/accueil");
     }else{
-        return new Response("pas ok");
+        return new Response("Mauvais identifiant ou mot de passe merci de réessayer ou de proceder a l'inscription");
     }
     }
 
@@ -118,7 +118,7 @@ class SecurityController extends Controller {
         $account = $this->get("api.account")->findOne($id);
  
         $form = $this->createFormBuilder($account)
-            ->add('username', 'text')
+            //->add('username', 'text')
             ->add('password', 'password')
             ->add('Envoyer', 'submit')
             ->getForm();
