@@ -1,7 +1,11 @@
 security:
     encoders:
-        Symfony\Component\Security\Core\User\User: plaintext
+        Cubbyhole\WebApiBundle\Entity\Account:
+            algorithm:   sha1
+            iterations: 1
+            encode_as_base64: true
 
+            
     role_hierarchy:
         ROLE_ADMIN:       ROLE_USER
         ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
@@ -11,25 +15,27 @@ security:
             memory:
                 users:
                     user:  { password: userpass, roles: [ 'ROLE_USER' ] }
-                    admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
+                    admin: { password: b401155418e6d30614a00e3548b37861f3f260ef, roles: [ 'ROLE_ADMIN' ] }
 
+        
     firewalls:
         dev:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
         login:
-            pattern:  ^/demo/secured/login$
+            pattern:  ^/secured/login$
             security: false
 
         secured_area:
-            pattern:    ^/demo/secured/
+            pattern:    ^/secured
             form_login:
-                check_path: _security_check
-                login_path: _demo_login
+                check_path: login_check
+                login_path: login
+
             logout:
-                path:   _demo_logout
-                target: _demo
+                path:   /secured/logout
+                target: /
             #anonymous: ~
             #http_basic:
             #    realm: "Secured Demo Area"

@@ -1,0 +1,16 @@
+# Renommer ce fichier pour remplacer l'autre. 
+parameters:
+    database_driver: pdo_mysql
+    database_host: 127.0.0.1
+    database_port: null
+    database_name: cubbyhole_proto
+    database_user: cubbyhole
+    database_password: cubbyhole
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
+    mailer_user: null
+    mailer_password: null
+    locale: en
+    secret: ThisTokenIsNotSoSecretChangeIt
+    api_username: user
+    api_password: pass

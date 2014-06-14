@@ -1,1 +1,16 @@
-Hello {{ name }}!
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('bundles/CubbyholeWebSiteBundle/css/style.css') }}" type="text/css" media="all" />
+{% endblock %}
+    
+{% block body %}
+  
+        <h1> Bienvenue sur le Site de Cubbyhole! </h1>
+        Pour commencer l'aventure veuillez vous
+        <a href="/login"> authentifier </a> ou <a href="/register"> procéder a l'inscription </a>
+                 
+
+{% endblock %}
+
+
+

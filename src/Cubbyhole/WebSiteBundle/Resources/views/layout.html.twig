@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <title>{% block title %}Cubbyhole{% endblock %}</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link rel="stylesheet" href="{{ asset('CubbyholeWebSiteBundle/Ressources/public/css/main.css') }}" type="text/css" media="all" />
+    </head>
+    <body>
+        <div id="page">
+            <div id="header">
+		<ul id="menu">
+		    <li><a href="/accueil">Accueil</a></li>
+		    <li><a href="/register">Enregistrement</a></li>
+		    <li><a href="/login">Connexion</a></li>                    
+		</ul>
+            </div>
+
+            <div id="content">
+                <h1>{{ block('title') }}</h1>
+                {% block content %}
+                {% endblock %}
+            </div>
+            <div id="footer">
+                <p>Tous droits réservés © 2011</p>
+            </div>
+        </div>
+    </body>
+</html>

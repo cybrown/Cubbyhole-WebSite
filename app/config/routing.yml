@@ -1,5 +1,12 @@
+cubbyhole_user:
+    resource: "@CubbyholeUserBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 cubbyhole_web_site:
     resource: "@CubbyholeWebSiteBundle/Controller/"
     type:     annotation
     prefix:   /
 
+logout:
+    pattern: /secured/logout

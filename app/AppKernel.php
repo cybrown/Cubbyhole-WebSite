@@ -17,6 +17,9 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Cubbyhole\WebSiteBundle\CubbyholeWebSiteBundle(),
+            new Cubbyhole\WebApiBundle\CubbyholeWebApiBundle(),
+            new JMS\SerializerBundle\JMSSerializerBundle(),
+            new Cubbyhole\UserBundle\CubbyholeUserBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

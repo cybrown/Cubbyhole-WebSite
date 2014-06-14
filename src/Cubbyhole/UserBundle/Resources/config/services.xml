@@ -6,11 +6,11 @@
 
     <!--
     <parameters>
-        <parameter key="cubbyhole_web_site.example.class">Cubbyhole\WebSiteBundle\Example</parameter>
+        <parameter key="cubbyhole_user.example.class">Cubbyhole\UserBundle\Example</parameter>
     </parameters>
 
     <services>
-        <service id="cubbyhole_web_site.example" class="%cubbyhole_web_site.example.class%">
+        <service id="cubbyhole_user.example" class="%cubbyhole_user.example.class%">
             <argument type="service" id="service_id" />
             <argument>plain_value</argument>
             <argument>%parameter_name%</argument>
