@@ -67,4 +67,33 @@ class AccountService
             "Content-Type" => "application/json"
         ], $this->serializer->serialize($account, "json"));
     }
+    
+    public function update($data){
+        $browser = new \Buzz\Browser();
+        $browser->post($this->baseUrl."/".$data->getId(), [
+            "Authorization" => "Basic ".base64_encode($this->username.":".$this->password),
+            "Content-Type" => "application/json"
+        ], json_encode([
+            "username" => $data->getUsername(),
+            "password" => $data->getPassword(),
+            "plan"=>$data->getPlan(),
+            "level"=>$data->getLevel()                
+        ]));
+     
+    }
+    
+       public function updatePlanAccount($id,$plan){
+            $browser = new \Buzz\Browser();
+            $browser->post($this->baseUrl."/".$data->getId(), [
+            "Authorization" => "Basic ".base64_encode($this->username.":".$this->password),
+            "Content-Type" => "application/json"
+        ], json_encode([
+            "username" => getUsername(),
+            "password" => getPassword(),
+            "plan"=>$plan,
+            "level"=>getLevel()
+                
+        ]));
+     
+    }
 }

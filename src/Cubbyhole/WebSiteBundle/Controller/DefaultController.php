@@ -59,8 +59,8 @@ class DefaultController extends Controller
         if ($form->isValid()) {
              $this->get("api.plan")->update($form->getData());
             return [
-                "message" => "L'objet a bien été reçu",
-                "objectJson" => var_export($form->getData(), true),
+                "message" => "La modification de l'offre a bien été reçu",
+//                "objectJson" => var_export($form->getData(), true),
                 "form" => false
             ];
         } else {
@@ -91,8 +91,8 @@ class DefaultController extends Controller
         if ($form->isValid()) {
            $this->get("api.plan")->create($form->getData());
             return [
-                "message" => "L'objet a bien été reçu",
-                "objectJson" => var_export($form->getData(), true),
+                "message" => "L'offre a bien été reçu",
+//                "objectJson" => var_export($form->getData(), true),
                 "form" => false
               
             ];
@@ -127,10 +127,12 @@ class DefaultController extends Controller
         //if ($form->isValid()) {
              $this->get("api.plan")->delete($form->getData());
       return [
-                "message" => "L'objet a bien été supprimer",
+                "message" => "L'offre a bien été supprimée",
                 //"objectJson" => var_export($form->getData(), true),
 //                "form" => false
            ];
+      $url = $this->generateUrl('/plans','');
+        $this->redirect($url);
 //        } else {
 //            return [
 //                "message" => "Erreur suppression du plan",

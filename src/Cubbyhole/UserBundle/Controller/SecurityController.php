@@ -3,8 +3,6 @@
 namespace Cubbyhole\UserBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage;
-use Symfony\Component\HttpFoundation\Session\Storage\Handler\NativeFileSessionHandler;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -85,11 +83,13 @@ class SecurityController extends Controller {
             $account->setPlan(4); //TODO Changer l'id du plan
             $this->get("api.account")->create($account);
             return [
-                "message" => "L'objet a bien été reçu",
-                "objectJson" => var_export($form->getData(), true),
+                "message" => "Bienvenue, merci de vous authentifier pour utiliser nos services. ",
+                #"objectJson" => var_export($form->getData(), true),
                 "form" => false
               
             ];
+            $url = $this->generateUrl('/','');
+        $this->redirect($url);
         } else {
             return [
                 "message" => "Veuillez remplir les informations demandées:",
@@ -126,14 +126,12 @@ class SecurityController extends Controller {
         if ($form->isValid()) {
              $this->get("api.account")->update($form->getData());
             return [
-                "message" => "L'objet a bien été reçu",
-                "objectJson" => var_export($form->getData(), true),
-                "form" => false
+               "message" => "La modification a bien été reçu",
+               "form" => false
             ];
         } else {
             return [
                 "message" => "Modification de vos données personnelles:",
-                "objectJson" => "",
                 "form" => $form->createView()
             ];
         }
@@ -170,7 +168,7 @@ class SecurityController extends Controller {
         //if ($form->isValid()) {
              $this->get("api.account")->delete($form->getData());
       return [
-                "message" => "L'objet a bien été supprimer"
+                "message" => "Le plan a bien été supprimer"
            ];
     }
  }
