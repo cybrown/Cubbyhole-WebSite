@@ -8,17 +8,18 @@ use Exception;
 
 class AccountService
 {
-    private $baseUrl = 'http://localhost:3000/accounts';
+    private $baseUrl;
     private $browser;
     private $username;
     private $password;
     private $serializer;
 
-    function __construct($username, $password, $serializer)
+    function __construct($username, $password, $serializer, $baseUrl)
     {
         $this->username = $username;
         $this->password = $password;
         $this->serializer = $serializer;
+        $this->baseUrl = $baseUrl . "accounts";
     }
     
     public function setBrowser($browser)

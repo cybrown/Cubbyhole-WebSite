@@ -4,17 +4,18 @@ namespace Cubbyhole\WebApiBundle\Service;
 
 class PlanService
 {
-    private $baseUrl = 'http://localhost:3000/plans';
+    private $baseUrl;
     private $browser;
     private $username;
     private $password;
     private $serializer;
 
-    function __construct($username, $password, $serializer)
+    function __construct($username, $password, $serializer, $baseUrl)
     {
         $this->username = $username;
         $this->password = $password;
         $this->serializer = $serializer;
+        $this->baseUrl = $baseUrl . "plans";
     }
     
     public function setBrowser($browser)

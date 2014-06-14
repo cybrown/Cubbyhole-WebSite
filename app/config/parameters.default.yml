@@ -14,3 +14,4 @@ parameters:
     secret: ThisTokenIsNotSoSecretChangeIt
     api_username: user
     api_password: pass
+    api_baseurl: "http://localhost:3000/"
