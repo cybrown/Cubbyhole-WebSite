@@ -12,16 +12,16 @@ Bonjour {{username}}!
 (Admin Session)
 <br/>
 <br/>
-<a href="/plans"> Gestion des offres Cubbyhole </a>
+<a href="{{ path('plans') }}"> Gestion des offres Cubbyhole </a>
 <br/>
-<a href="/addPlan"> Ajouter une offre </a>
+<a href="{{ path('addPlan') }}"> Ajouter une offre </a>
 {% else %}
 <br/>
-<a href="/accountupdt/{{id}}"> Gestion de votre compte </a>
+<a href="{{ path('accountUpdt', {'id': id}) }}"> Gestion de votre compte </a>
 <br/>
-<a href="/plans">Modifier votre offre </a>
+<a href="{{ path('plans') }}">Modifier votre offre </a>
 {% endif %}
 <br/>
 <br/>
-<a href="/logout"> Deconnexion </a>
+<a href="{{ path('logout') }}"> Deconnexion </a>
 {% endif %}

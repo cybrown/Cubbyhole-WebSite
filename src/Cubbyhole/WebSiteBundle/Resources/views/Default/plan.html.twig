@@ -2,7 +2,7 @@
     {% set level = app.session.get('level') %}
     {% set id = app.session.get('id') %}
     <h1>Liste des formules disponibles:</h1>
-    <a href="/accueil"> retour a l'accueil </a>
+    <a href="{{ path('accueil') }}"> retour a l'accueil </a>
 
     <ul>
 
