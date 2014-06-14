@@ -66,7 +66,7 @@ class SecurityController extends Controller {
     }
 
      /**
-     * @Route("/register")
+     * @Route("/register", name="register")
      * @Template() 
      */
     public function registerAction(Request $request) {

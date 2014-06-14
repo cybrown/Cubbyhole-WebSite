@@ -20,7 +20,7 @@ class DefaultController extends Controller
     }
     
      /**
-     * @Route("/accueil"), name="accueil"
+     * @Route("/accueil", name="accueil")
      * @Template()
      */
     public function accueilAction()
@@ -74,7 +74,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/addPlan")
+     * @Route("/addPlan", name="addPlan")
      * @Template()
      */
     public function addPlanAction(Request $request) {
