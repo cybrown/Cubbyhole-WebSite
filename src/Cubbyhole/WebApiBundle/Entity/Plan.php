@@ -45,6 +45,11 @@ class Plan
      */
     protected $shareQuota;
     
+     /**
+     * @Type("string")
+     */
+    protected $idPaypal;    
+   
     public function getId() {
         return $this->id;
     }
@@ -70,6 +75,10 @@ class Plan
     }
 
     public function getSpace() {
+        return $this->space;
+    }
+    
+     public function getIdPaypal() {
         return $this->space;
     }
 
@@ -99,5 +108,9 @@ class Plan
 
     public function setShareQuota($shareQuota) {
         $this->shareQuota = $shareQuota;
+    }
+
+    public function setIdPaypal($idPaypal) {
+        $this->idPaypal = $idPaypal;
     }
 }
