@@ -53,6 +53,7 @@ class DefaultController extends Controller
             ->add('bandwidthUpload', 'number')
             ->add('space', 'number')
             ->add('shareQuota', 'number')
+            ->add('idPaypal','text')
             ->add('Envoyer', 'submit')
             ->getForm();
         $form->handleRequest($request);
@@ -85,6 +86,7 @@ class DefaultController extends Controller
                 ->add('BandwidthUpload', 'number')
                 ->add('Space', 'number')
                 ->add('ShareQuota', 'number')
+                ->add('idPaypal','text')
                 ->add('Envoyer', 'submit')
                 ->getForm();
         $form->handleRequest($request);
@@ -92,7 +94,7 @@ class DefaultController extends Controller
            $this->get("api.plan")->create($form->getData());
             return [
                 "message" => "L'offre a bien été reçu",
-//                "objectJson" => var_export($form->getData(), true),
+                "objectJson" => var_export($form->getData(), true),
                 "form" => false
               
             ];
@@ -121,6 +123,7 @@ class DefaultController extends Controller
             ->add('bandwidthUpload', 'number')
             ->add('space', 'number')
             ->add('shareQuota', 'number')
+            ->add('idPaypal','text')
             ->add('Envoyer', 'submit')
             ->getForm();
         $form->handleRequest($request);

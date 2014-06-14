@@ -47,6 +47,7 @@ class Plan
     
      /**
      * @Type("string")
+     * @SerializedName("idpaypal") 
      */
     protected $idPaypal;    
    
@@ -79,7 +80,7 @@ class Plan
     }
     
      public function getIdPaypal() {
-        return $this->space;
+        return $this->idPaypal;
     }
 
     public function getShareQuota() {
